@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" href="IMG/CREATIVE.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Farisul Fahmi</title>
+<style>
+  :root {
+    --bg-dark: #0a0c12;
+    --aqua: #00f0ff;
+    --white: #e9f0f7;
+    --shadow: rgba(0, 255, 255, 0.3);
+  }
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  body {
+    background-color: var(--bg-dark);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 4rem;
+  }
+  /* Navbar */
+  header {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between; /* logo kiri, nav kanan */
+    align-items: center;
+    padding: 1rem 2rem;
+    margin-bottom: 3rem;
+    position: sticky;
+    top: 0;
+    background: var(--bg-dark);
+    box-shadow: 0 3px 12px var(--shadow);
+    z-index: 100;
+  }
+  .logo {
+    order: 1;
+  }
+  nav {
+    order: 3;
+  }
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -6px;
+    left: 0;
+    background: var(--aqua);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+  }
+  nav a:hover,
+  nav a:focus {
+    color: var(--aqua);
+    outline: none;
+  }
+  nav a:hover::after,
+  nav a:focus::after {
+    width: 100%;
+  }
+
+  /* Hamburger button styles */
+  #menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+    order: 2; /* posisi kanan di header */
+  }
+  #menu-toggle:focus {
+    outline: 2px solid var(--aqua);
+    outline-offset: 2px;
+  }
+  #menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--aqua);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* Contact Section */
+  section#contact {
+    width: 100%;
+    max-width: 700px;
+    padding: 0 1.5rem 4rem 1.5rem;
+    margin: 0 auto;
+    color: var(--white);
+  }
+  section#contact h2 {
+    text-align: center;
+    color: var(--aqua);
+    text-shadow: 0 0 8px var(--aqua);
+    margin-bottom: 2.5rem;
+    font-size: 2.8rem;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    background: linear-gradient(135deg, #021014 40%, #002d36 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px var(--shadow);
+  }
+  label {
+    font-weight: 600;
+    user-select: none;
+  }
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 2px solid var(--aqua);
+    background-color: #011217;
+    color: var(--white);
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: inset 0 0 5px #003f47;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  textarea:focus {
+    border-color: var(--white);
+    box-shadow: 0 0 8px var(--aqua);
+    outline: none;
+  }
+  button[type="submit"] {
+    background-color: var(--aqua);
+    color: var(--bg-dark);
+    padding: 0.85rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 0 20px var(--aqua);
+    transition: background-color 0.3s ease, box-shadow 0.4s ease;
+    user-select: none;
+  }
+  button[type="submit"]:hover,
+  button[type="submit"]:focus {
+    background-color: #00c8d8;
+    box-shadow: 0 0 30px #00ffff;
+    outline: none;
+  }
+
+  /* Responsive Nav and Form for smaller screens */
+  @media (max-width: 768px) {
+    header {
+      padding: 1rem 1.5rem;
+      position: relative;
+    }
+
+    nav {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--bg-dark);
+      width: 200px;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 5px 15px var(--shadow);
+      display: none;
+      z-index: 100;
+    }
+
+    nav.show {
+      display: block;
+    }
+
+    nav ul {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    #menu-toggle {
+      display: flex;
+    }
+  }
+
+  /* Additional for very small screens */
+  @media (max-width: 480px) {
+    nav ul {
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+    form {
+      padding: 1rem;
+      gap: 1.2rem;
+    }
+    button[type="submit"] {
+      font-size: 1rem;
+      padding: 0.7rem;
+    }
+  }
+
+  /* ===== Animasi ===== */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Body Fade */
+body {
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Header (Navbar) */
+header {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.2s;
+}
+
+/* Section Title */
+#contact h2 {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.4s;
+}
+
+/* Form container */
+form {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.6s;
+}
+
+/* Animasi setiap field input */
+form input,
+form textarea,
+form button {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Animasi urut berdasarkan posisi */
+form input:nth-of-type(1) { animation-delay: 0.7s; }
+form input:nth-of-type(2) { animation-delay: 0.9s; }
+form textarea { animation-delay: 1.1s; }
+form button { animation-delay: 1.3s; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img src="IMG/CREATIVE.png" alt="Logo" width="100" height="100" /></div>
+
+  <button id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <nav id="nav-menu">
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projek.html">Projects</a></li>
+      <li><a href="#contact" aria-current="page">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="contact" tabindex="0" aria-label="Contact Section">
+  <h2>Contact Me</h2>
+  <form id="contact-form" novalidate aria-describedby="form-desc">
+    <p id="form-desc" class="sr-only">Form to send your name, email, and message.</p>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required placeholder="Your name" aria-required="true" />
+    
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required placeholder="Your email" aria-required="true" />
+    
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="5" required placeholder="Your message" aria-required="true"></textarea>
+    
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Terima kasih atas pesan Anda! Saya akan segera membalasnya.');
+    form.reset();
+  });
+
+  // Navbar toggle for mobile
+  const menuToggle = document.getElementById('menu-toggle');
+  const navMenu = document.getElementById('nav-menu');
+
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+    menuToggle.setAttribute('aria-expanded', !expanded);
+    
+    navMenu.classList.toggle('show');
+  });
+</script>
+
+</body>
+</html>

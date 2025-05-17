@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="CREATIVE.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Farisul Fahmi</title>
+  <style>
+    :root {
+      --bg-dark: #0a0c12;
+      --aqua: #00f0ff;
+      --white: #e9f0f7;
+      --shadow: rgba(0, 255, 255, 0.3);
+    }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 4rem;
+      overflow-x: hidden;
+    }
+    /* Navbar */
+    header {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      margin-bottom: 3rem;
+      position: sticky;
+      top: 0;
+      background: var(--bg-dark);
+      box-shadow: 0 3px 12px var(--shadow);
+      z-index: 100;
+      user-select: none;
+    }
+    .logo img {
+      width: 100px;
+      height: 100px;
+      user-select: none;
+    }
+    nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+    }
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 600;
+      position: relative;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background: var(--aqua);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: var(--aqua);
+      outline: none;
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      width: 100%;
+    }
+
+    /* Hamburger menu button */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--aqua);
+      font-size: 2.5rem;
+      cursor: pointer;
+      margin-left: 1rem;
+      user-select: none;
+    }
+
+    /* Projects Section */
+    main.projects-section {
+      width: 100%;
+      max-width: 1100px;
+      padding: 0 1.5rem;
+    }
+    main.projects-section h2 {
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--aqua);
+      text-shadow: 0 0 8px var(--aqua);
+      user-select: none;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+    .project-card {
+      background: linear-gradient(135deg, #021014 40%, #002d36 100%);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px var(--shadow);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+    .project-card:focus,
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 15px 45px #00ffffaa;
+      outline: none;
+    }
+    .project-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-bottom: 3px solid var(--aqua);
+    }
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      user-select: none;
+    }
+    .project-card:hover .project-image img,
+    .project-card:focus .project-image img {
+      transform: scale(1.1);
+    }
+    .project-info {
+      padding: 1.2rem 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .project-info h3 {
+      color: var(--aqua);
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      user-select: text;
+    }
+    .project-info p {
+      font-size: 1rem;
+      color: #c1dcdc;
+      line-height: 1.5;
+      user-select: text;
+    }
+
+    /* Responsive Nav for smaller */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--bg-dark);
+        width: 200px;
+        padding: 1rem 2rem;
+        display: none;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 4px 20px var(--shadow);
+      }
+      nav ul.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    body {
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Animasi project-card */
+.project-card {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInCard 0.6s ease forwards;
+}
+
+/* Tambahkan delay berdasarkan urutan */
+.project-card:nth-child(1) { animation-delay: 0.2s; }
+.project-card:nth-child(2) { animation-delay: 0.4s; }
+.project-card:nth-child(3) { animation-delay: 0.6s; }
+.project-card:nth-child(4) { animation-delay: 0.8s; }
+.project-card:nth-child(5) { animation-delay: 1s; }
+.project-card:nth-child(6) { animation-delay: 1.2s; }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInCard {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<header role="banner">
+  <div class="logo" aria-label="Farisul Fahmi Logo">
+    <img src="IMG/CREATIVE.png" alt="Farisul Fahmi Logo" />
+  </div>
+  <nav role="navigation" aria-label="Main Navigation">
+    <ul id="main-nav">
+      <li><a href="home.html" tabindex="0">Home</a></li>
+      <li><a href="about.html" tabindex="0">About</a></li>
+      <li><a href="#projects" aria-current="page" tabindex="0">Projects</a></li>
+      <li><a href="contak.html" tabindex="0">Contact</a></li>
+    </ul>
+  </nav>
+  <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav">
+    ☰
+  </button>
+</header>
+
+<main class="projects-section" id="projects" tabindex="0" aria-label="Projects Section">
+  <h2>My Projects</h2>
+  <div class="projects-grid">
+    <article class="project-card" tabindex="0">
+      <div class="project-image">
+        <a href="Wisata/index.html"><img src="IMG/Projek1.webp" alt="Project 1 image" /></a>
+      </div>
+      <div class="project-info">
+        <h3>Wisata</h3>
+        <p>A web app built with React and TailwindCSS for managing tasks.</p>
+      </div>
+    </article>
+
+    <article class="project-card" tabindex="0">
+      <div class="project-image">
+        <a href="Perpustakaan/index.html"><img src="IMG/bg_perpus.jpg" alt="Project 2 image" /></a>
+      </div>
+      <div class="project-info">
+        <h3>Perpustakaan</h3>
+        <p>An e-commerce site designed with UX-first principles and modern UI.</p>
+      </div>
+    </article>
+
+    <article class="project-card" tabindex="0">
+      <div class="project-image">
+        <a href="Game/index.html"><img src="IMG/Screenshot 2025-05-16 073040.png" alt="Project 3 image" /></a>
+      </div>
+      <div class="project-info">
+        <h3>Game</h3>
+        <p>A mobile app for fitness tracking with GPS and analytics features.</p>
+      </div>
+    </article>
+
+    <article class="project-card" tabindex="0">
+      <div class="project-image">
+        <a href="kalkulator/index.html"><img src="IMG/Kalkulator.png" alt="Project 4 image" /></a>
+      </div>
+      <div class="project-info">
+        <h3>Kalkulator</h3>
+        <p>Dashboard for monitoring real-time IoT devices with notifications.</p>
+      </div>
+    </article>
+
+    <article class="project-card" tabindex="0">
+      <div class="project-image">
+        <a href="Restoran/index.html"><img src="IMG/bg_restoran.jpg" alt="Project 5 image" /></a>
+      </div>
+      <div class="project-info">
+        <h3>Restoran</h3>
+        <p>A chatbot AI integration for customer service and lead generation.</p>
+      </div>
+    </article>
+
+    <article class="project-card" tabindex="0">
+      <div class="project-image">
+        <a href="Toko online/index.html"><img src="IMG/toko online.jpg" alt="Project 6 image" /></a>
+      </div>
+      <div class="project-info">
+        <h3>Toko Online</h3>
+        <p>Interactive data visualization platform using D3.js and SVG.</p>
+      </div>
+    </article>
+  </div>
+</main>
+
+<script>
+  // Toggle mobile menu
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navMenu = document.getElementById('main-nav');
+
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+    menuToggle.setAttribute('aria-expanded', !expanded);
+    navMenu.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>

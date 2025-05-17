@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GoldFlame Resto</title>
+  <style>
+    :root {
+      --primary: #ffd700;
+      --dark: #1a1a1a;
+      --light: #f5f5f5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,0.85);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: var(--light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #111;
+        flex-direction: column;
+        width: 200px;
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 80px;
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--primary);
+      text-shadow: 2px 2px 10px #000;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      color: var(--light);
+    }
+
+    section {
+      padding: 80px 20px;
+      max-width: 1100px;
+      margin: auto;
+      animation: fadeUp 1s ease-out;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 2rem;
+    }
+
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .menu-card {
+      background: #2a2a2a;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      transition: transform 0.3s;
+    }
+
+    .menu-card:hover {
+      transform: scale(1.03);
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .menu-card .content {
+      padding: 1rem;
+    }
+
+    .kontak {
+      text-align: center;
+    }
+
+    .kontak p {
+      margin: 0.5rem 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">GoldFlame</div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home">Beranda</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </header>
+
+  <section class="hero" id="home">
+    <div>
+      <h1>Rasakan Sensasi Mewah Dalam Setiap Gigitan</h1>
+      <p>Masakan kelas dunia di jantung kota</p>
+    </div>
+  </section>
+
+  <section id="tentang">
+    <h2>Tentang Kami</h2>
+    <p style="text-align:center; max-width: 700px; margin: auto;">GoldFlame adalah restoran mewah yang menghadirkan perpaduan antara seni kuliner klasik dan sentuhan modern. Setiap hidangan kami diracik oleh chef berpengalaman dengan bahan terbaik.</p>
+  </section>
+
+  <section id="menu">
+    <h2>Menu Favorit</h2>
+    <div class="menu-container">
+      <div class="menu-card">
+        <img src="piza.jpg" alt="Steak Emas">
+        <div class="content">
+          <h3>Pizza</h3>
+          <p>Daging premium dengan saus spesial dan taburan emas 24K.</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d" alt="Seafood Royal">
+        <div class="content">
+          <h3>Burger</h3>
+          <p>Kombinasi udang, lobster & kerang dalam saus krim istimewa.</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="tiramisu.jpg" alt="Tiramisu Lava">
+        <div class="content">
+          <h3>Tiramisu Lava</h3>
+          <p>Pencuci mulut istimewa dengan lelehan coklat dan kopi espresso.</p>
+        </div>
+      </div>
+
+       <div class="menu-card">
+        <img src="Lobster.webp" alt="Seafood Royal">
+        <div class="content">
+          <h3>Lobster</h3>
+          <p>Kombinasi udang, lobster & kerang dalam saus krim istimewa.</p>
+        </div>
+      </div>
+       <div class="menu-card">
+        <img src="sate.avif" alt="Seafood Royal">
+        <div class="content">
+          <h3>Sate</h3>
+          <p>Kombinasi udang, lobster & kerang dalam saus krim istimewa.</p>
+        </div>
+      </div>
+       <div class="menu-card">
+        <img src="ayam geprek.jpg" alt="Seafood Royal">
+        <div class="content">
+          <h3>Nasi Ayam</h3>
+          <p>Kombinasi udang, lobster & kerang dalam saus krim istimewa.</p>
+        </div>
+      </div>
+
+       <div class="menu-card">
+        <img src="rendang.jpg" alt="Seafood Royal">
+        <div class="content">
+          <h3>Rendang</h3>
+          <p>Kombinasi udang, lobster & kerang dalam saus krim istimewa.</p>
+        </div>
+      </div>
+       <div class="menu-card">
+        <img src="bakso.jpg" alt="Seafood Royal">
+        <div class="content">
+          <h3>Bakso</h3>
+          <p>Kombinasi udang, lobster & kerang dalam saus krim istimewa.</p>
+        </div>
+      </div>
+       <div class="menu-card">
+        <img src="ikan.jpg" alt="Seafood Royal">
+        <div class="content">
+          <h3>Ikan Bakar</h3>
+          <p>Kombinasi udang, lobster & kerang dalam saus krim istimewa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak" class="kontak">
+    <h2>Hubungi Kami</h2>
+    <p>Email: farisulfahmi294@gmail.com</p>
+    <p>Facebook: Farisul fahmi</p>
+    <p>Telepon: +62 813-4059-7338</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 GoldFlame Resto. Farisul Fahmi.</p>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>

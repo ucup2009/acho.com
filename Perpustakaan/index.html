@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NeoLibrary</title>
+  <style>
+    :root {
+      --primary: #00d2d3;
+      --bg-dark: #1e1f26;
+      --text-light: #f1f1f1;
+      --card-bg: #292b34;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+
+    /* Animasi masuk */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #121318;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: white;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: #121318;
+        flex-direction: column;
+        width: 200px;
+        display: none;
+        padding: 1rem;
+        border-left: 1px solid #333;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      background-image: url(bg_perpus.jpg);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 70px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    /* Koleksi */
+    .koleksi {
+      padding: 80px 20px 60px;
+      text-align: center;
+    }
+
+    .koleksi h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .card-text {
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .card-text h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Tentang */
+    .tentang {
+      padding: 60px 20px;
+      background: #22232b;
+      text-align: center;
+    }
+
+    .tentang h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .tentang p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    /* Kontak */
+    .kontak {
+      padding: 60px 20px;
+      text-align: center;
+      background: #1a1b21;
+    }
+
+    .kontak h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .kontak p {
+      margin: 0.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      background: #121318;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">📚 NeoLibrary</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div><div></div><div></div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Beranda</a></li>
+      <li><a href="#koleksi">Koleksi</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero fade-in">
+    <div class="hero-content">
+      <h1>Temukan Dunia Lewat Buku</h1>
+      <p>Perpustakaan modern untuk generasi masa depan</p>
+    </div>
+  </section>
+
+  <!-- Koleksi -->
+  <section id="koleksi" class="koleksi fade-in">
+    <h2>Koleksi Pilihan</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="Lukisanawan.webp" alt="Book 1" />
+        <div class="card-text">
+          <h3>Lukisan Awan</h3>
+          <p>Pengetahuan modern dalam bahasa yang mudah.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="katasenjamenyapa.webp" alt="Book 2" />
+        <div class="card-text">
+          <h3>Kata Senja</h3>
+          <p>Dunia magis dan cerita epik untuk pembaca muda.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="Sianakpintar.jpg" alt="Book 3" />
+        <div class="card-text">
+          <h3>Si Anak Pintar</h3>
+          <p>Mengenal teknologi dan masa depan digital.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tentang -->
+  <section id="tentang" class="tentang fade-in">
+    <h2>Tentang NeoLibrary</h2>
+    <p>NeoLibrary adalah perpustakaan digital dan fisik yang menghadirkan akses literasi berkualitas tinggi bagi semua. Kami percaya bahwa membaca adalah kunci untuk membangun masa depan yang cerah.</p>
+  </section>
+
+  <!-- Kontak -->
+  <section id="kontak" class="kontak fade-in">
+    <h2>Kontak</h2>
+    <p>Email: farisulfahmi294@gmail.com</p>
+    <p>Facebook: Farisul fahmi</p>
+    <p>WhatsApp: +62 813-4059-7338</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 NeoLibrary. Semua Hak Dilindungi.</p>
+  </footer>
+
+  <!-- Script Hamburger -->
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

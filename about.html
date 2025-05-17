@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Farisul Fahmi Portfolio</title>
+  <link rel="icon" href="IMG/CREATIVE.png" />
+  <style>
+    :root {
+      --bg-dark: #0a0c12;
+      --aqua: #00f0ff;
+      --white: #e9f0f7;
+      --shadow: rgba(0, 255, 255, 0.25);
+    }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1rem;
+      overflow-x: hidden;
+    }
+    header {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+      margin-bottom: 4rem;
+      position: sticky;
+      top: 0;
+      background: var(--bg-dark);
+      box-shadow: 0 3px 12px var(--shadow);
+      z-index: 10;
+      animation: slideDown 1s ease forwards;
+    }
+    .logo img {
+      width: 100px;
+      height: 100px;
+      user-select: none;
+    }
+    nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+    }
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 600;
+      position: relative;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background: var(--aqua);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    nav a:hover {
+      color: var(--aqua);
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    /* Hamburger menu button */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--aqua);
+      font-size: 2.5rem;
+      cursor: pointer;
+      margin-left: 1rem;
+      user-select: none;
+    }
+
+    /* About Section */
+    .about {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #021014 40%, #002d36 100%);
+      border-radius: 24px;
+      box-shadow: 0 10px 40px var(--shadow);
+      overflow: hidden;
+      animation: fadeInUp 1.8s ease forwards;
+      gap: 2rem;
+      padding: 2rem;
+      user-select: none;
+    }
+    .about-image {
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 450px;
+      aspect-ratio: 4 / 5;
+      background: var(--aqua);
+      border-radius: 24px;
+      box-shadow:
+        0 0 15px var(--aqua),
+        inset 0 0 20px #00ffffaa;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+      filter: drop-shadow(0 0 12px var(--aqua));
+    }
+    .about-image:hover {
+      transform: scale(1.05) rotate(3deg);
+      filter: drop-shadow(0 0 20px #00fff7);
+      box-shadow:
+        0 0 25px #00f5ff,
+        inset 0 0 25px #00ffffdd;
+      z-index: 5;
+    }
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px;
+      display: block;
+      transition: opacity 0.6s ease;
+    }
+    .about-text {
+      flex: 1;
+      color: var(--white);
+      font-weight: 400;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      padding-right: 1rem;
+      position: relative;
+      opacity: 0;
+      animation: fadeInText 2.2s ease forwards;
+      user-select: text;
+    }
+    .about-text::before {
+      content: '';
+      position: absolute;
+      left: -1.5rem;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(180deg, #00ffff, #0099aa);
+      box-shadow: 0 0 12px #00ffffaa;
+    }
+
+    /* Responsive */
+    @media (min-width: 900px) {
+      .about {
+        flex-direction: row;
+        padding: 3rem 4rem;
+      }
+      .about-text {
+        padding-right: 0;
+      }
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--bg-dark);
+        width: 200px;
+        padding: 1rem 2rem;
+        display: none;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 4px 20px var(--shadow);
+      }
+      nav ul.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Animations */
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInText {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <header role="banner">
+    <div class="logo" aria-label="Farisul Fahmi Logo">
+      <img src="IMG/CREATIVE.png" alt="Farisul Fahmi Logo" />
+    </div>
+    <nav role="navigation" aria-label="Main Navigation">
+      <ul id="main-nav">
+        <li><a href="home.html" tabindex="0">Home</a></li>
+        <li><a href="#about" tabindex="0">About</a></li>
+        <li><a href="projek.html" tabindex="0">Projects</a></li>
+        <li><a href="contak.html" tabindex="0">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav">
+      ☰
+    </button>
+  </header>
+
+  <section class="about" id="about" tabindex="0" aria-label="About Me Section">
+    <div class="about-image" role="img" aria-label="Portrait Image">
+      <img src="IMG/about.jpg" alt="Portrait photo" />
+    </div>
+    <div class="about-text">
+      <p>
+        Halo! Saya seorang pengembang front-end yang bersemangat dan suka menciptakan pengalaman digital yang unik dan menarik.
+        Keahlian saya terletak pada penggabungan desain modern dengan interaksi lancar yang memikat pengguna.
+      </p>
+      <p style="margin-top:1rem;">
+        Portofolio ini memamerkan perjalanan, keterampilan, dan proyek saya — semuanya terbungkus dalam estetika warna aqua gelap yang khas,
+        memadukan kejelasan dan gaya untuk kesan yang tak terlupakan.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    // Toggle mobile menu
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.getElementById('main-nav');
+
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      navMenu.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

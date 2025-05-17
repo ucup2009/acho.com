@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catch The Box!</title>
+  <style>
+    body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at center, #001f3f, #000);
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+.game-container {
+  margin-top: 50px;
+  position: relative;
+  height: 500px;
+}
+
+#box {
+  width: 50px;
+  height: 50px;
+  background-color: aqua;
+  position: absolute;
+  display: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 10px aqua;
+  transition: all 0.2s ease-in-out;
+}
+
+#startBtn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #00bcd4;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#startBtn:hover {
+  background-color: #008ba3;
+}
+
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>🎯 Catch The Box!</h1>
+    <p>Waktu: <span id="time">30</span> detik</p>
+    <p>Skor: <span id="score">0</span></p>
+    <div id="box"></div>
+    <button onclick="startGame()" id="startBtn">Mulai</button>
+  </div>
+
+  <script>
+    let score = 0;
+let time = 30;
+let timerInterval;
+let boxInterval;
+
+const box = document.getElementById("box");
+const scoreDisplay = document.getElementById("score");
+const timeDisplay = document.getElementById("time");
+const startBtn = document.getElementById("startBtn");
+
+function startGame() {
+  score = 0;
+  time = 30;
+  scoreDisplay.textContent = score;
+  timeDisplay.textContent = time;
+  startBtn.disabled = true;
+  box.style.display = "block";
+
+  moveBox();
+
+  boxInterval = setInterval(moveBox, 800);
+  timerInterval = setInterval(() => {
+    time--;
+    timeDisplay.textContent = time;
+
+    if (time <= 0) {
+      endGame();
+    }
+  }, 1000);
+}
+
+function moveBox() {
+  const x = Math.random() * (window.innerWidth - 60);
+  const y = Math.random() * (window.innerHeight - 160);
+  box.style.left = `${x}px`;
+  box.style.top = `${y}px`;
+  box.style.backgroundColor = getRandomColor();
+  box.style.boxShadow = `0 0 20px ${box.style.backgroundColor}`;
+}
+
+box.addEventListener("click", () => {
+  score++;
+  scoreDisplay.textContent = score;
+  moveBox();
+});
+
+function endGame() {
+  clearInterval(timerInterval);
+  clearInterval(boxInterval);
+  box.style.display = "none";
+  startBtn.disabled = false;
+  alert(`⏰ Waktu habis! Skor akhir kamu: ${score}`);
+}
+
+function getRandomColor() {
+  const colors = ["aqua", "lime", "magenta", "orange", "red", "yellow"];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+  </script>
+</body>
+</html>
